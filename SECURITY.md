@@ -48,7 +48,7 @@ This library is pending independent security audits. Current status:
 If you discover a security vulnerability in NyxEnc, please follow these steps:
 
 1. **DO NOT** disclose the vulnerability publicly
-2. Email [your-security-email@domain.com](mailto:your-security-email@domain.com) with:
+2. Email [contact@nyxanonguard.io](mailto:contact@nyxanonguard.io) with:
    - Description of the vulnerability
    - Steps to reproduce
    - Potential impact
@@ -119,8 +119,8 @@ Security updates will be:
 ## 🙏 Security Acknowledgments
 
 Thanks to our security researchers:
-- [Your acknowledgments will go here]
+- No security vulnerabilities reported yet. Be the first to help secure NyxEnc!
 
 ---
 
-Last updated: [Current Date] 
+Last updated: June 2025

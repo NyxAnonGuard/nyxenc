@@ -38,7 +38,7 @@ const encrypted = encryptContent(content, key);
 
 // Create .nyxenc file
 const metadata = {
-  encryptionWallet: "your-solana-wallet",
+  encryptionWallet: "7v91N7iuxY3xV5RbGP1YJwXNkV4YzXn2pKhZhWPu7Pv6", // Your Solana wallet
   planType: "free",
   createdAt: new Date().toISOString(),
   expiresAt: "2025-01-01T00:00:00.000Z",
@@ -118,7 +118,8 @@ If you discover a security vulnerability, please follow our [Security Policy](SE
 ## 📬 Contact
 
 - GitHub: [@nyxanonguard](https://github.com/nyxanonguard)
-- Twitter: [@yourhandle](https://twitter.com/yourhandle)
+- Twitter: [@NyxAnonGuard](https://x.com/NyxAnonGuard)
+- Email: contact@nyxanonguard.io
 
 ---
 

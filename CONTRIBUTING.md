@@ -46,7 +46,7 @@ We use GitHub issues to track public bugs. Report a bug by [opening a new issue]
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability, please do NOT open an issue. Email [your-security-email@domain.com](mailto:your-security-email@domain.com) instead.
+If you discover a security vulnerability, please do NOT open an issue. Email [contact@nyxanonguard.io](mailto:contact@nyxanonguard.io) instead.
 
 ## License
 By contributing, you agree that your contributions will be licensed under its MIT License.

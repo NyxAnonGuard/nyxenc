@@ -19,7 +19,7 @@ async function basicEncryption() {
   
   // Create metadata
   const metadata = {
-    encryptionWallet: "your-solana-wallet-address",
+    encryptionWallet: "7v91N7iuxY3xV5RbGP1YJwXNkV4YzXn2pKhZhWPu7Pv6", // Example Solana address
     planType: "free" as const,
     createdAt: new Date().toISOString(),
     expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(), // 24 hours
