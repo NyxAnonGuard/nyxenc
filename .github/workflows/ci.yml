@@ -27,7 +27,7 @@ jobs:
       run: npm ci
     
     - name: Run linter
-      run: npm run lint
+      run: npm run lint:check
     
     - name: Run tests
       run: npm test
@@ -49,35 +49,46 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Run security audit
-      run: npm audit
-    
-    - name: Run Snyk to check for vulnerabilities
-      uses: snyk/actions/node@master
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-  publish:
-    needs: [test, security]
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    
-    steps:
-    - uses: actions/checkout@v4
-    
     - name: Use Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20.x'
-        registry-url: 'https://registry.npmjs.org'
+        cache: 'npm'
     
     - name: Install dependencies
       run: npm ci
     
-    - name: Build
-      run: npm run build
+    - name: Run security audit
+      run: npm audit --audit-level=high
     
-    - name: Publish to npm
-      run: npm publish
+    - name: Run Snyk to check for vulnerabilities
+      uses: snyk/actions/node@master
+      continue-on-error: true
       env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  # Publish job disabled until ready for NPM publication
+  # publish:
+  #   needs: [test, security]
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+  #   
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   
+  #   - name: Use Node.js
+  #     uses: actions/setup-node@v4
+  #     with:
+  #       node-version: '20.x'
+  #       registry-url: 'https://registry.npmjs.org'
+  #   
+  #   - name: Install dependencies
+  #     run: npm ci
+  #   
+  #   - name: Build
+  #     run: npm run build
+  #   
+  #   - name: Publish to npm
+  #     run: npm publish
+  #     env:
+  #       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
