@@ -115,24 +115,14 @@ export function generateNyxEncFile(
       signature: ''
     };
 
-    // Derive key and verify consistency
-    const derivedKey = deriveDeterministicKey(enhancedMetadata, NYXENC_VERSION);
-    const expectedKey = deriveDeterministicKey(enhancedMetadata, NYXENC_VERSION);
-    
-    // Re-encrypt with derived key if needed
-    if (expectedKey !== encryptionKey && enhancedMetadata.securityNonce) {
-      const reEncryptedContent = decryptContent(encryptedContent, encryptionKey);
-      fileContent.encryptedContent = encryptContent(reEncryptedContent, expectedKey);
-    }
-
-    // Generate integrity signature
+    // Generate integrity signature using the provided encryption key
     const contentForSigning = JSON.stringify({
       version: fileContent.version,
       metadata: fileContent.metadata,
       encryptedContent: fileContent.encryptedContent
     });
     
-    fileContent.signature = CryptoJS.HmacSHA256(contentForSigning, derivedKey).toString();
+    fileContent.signature = CryptoJS.HmacSHA256(contentForSigning, encryptionKey).toString();
     
     return fileContent;
   } catch (err) {
@@ -539,6 +529,7 @@ export async function verifyBlockchainMemoTransaction(
  * Generate a secure filename for .nyxenc downloads
  */
 export function generateSecureFilename(customTitle?: string): string {
+  /* eslint-disable-next-line no-control-regex */
   let filename = customTitle?.trim().replace(/[<>:"/\\|?*\x00-\x1f]/g, '').replace(/\.nyxenc$/i, '') || `encrypted-${Date.now()}`;
   filename = filename.substring(0, 50);
   return `${filename}.nyxenc`;
@@ -552,7 +543,7 @@ export function downloadNyxEncFile(nyxEncFile: NyxEncFile, filename: string): vo
   if ('showSaveFilePicker' in window) {
     // modern browsers
     (async () => {
-      // @ts-ignore
+      // @ts-expect-error showSaveFilePicker is experimental and not yet in the DOM lib
       const handle = await window.showSaveFilePicker({ suggestedName: filename });
       const writable = await handle.createWritable();
       await writable.write(blob);
