@@ -3,8 +3,8 @@
  * @module nyxenc
  */
 
-export * from './lib/types';
-export * from './lib/encryption';
+export * from './lib/types.js';
+export * from './lib/encryption.js';
 
 // Current version of the library
 export const VERSION = '1.0.0';
